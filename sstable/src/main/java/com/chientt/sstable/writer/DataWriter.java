@@ -1,8 +1,8 @@
 package com.chientt.sstable.writer;
 
 import com.chientt.sstable.Data;
+
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,12 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author chientt
  */
 public class DataWriter implements FileWriter {
 
-    public static String DATA_FILE = "data.db";
+    public static String DATA_PATH = "data.db";
 
     /**
      * key columnCount
@@ -25,15 +24,19 @@ public class DataWriter implements FileWriter {
      * @return
      */
     @Override
-    public void write(Data data) {
+    public long write(Data data) {
+        long pos = -1;
         try {
             List<String> lines = Arrays.asList(
                     data.index + data.word);
-            Path file = Paths.get(DATA_FILE);
-            Files.write(file, lines, StandardOpenOption.APPEND);
+            Path path = Paths.get(DATA_PATH);
+            pos = Files.size(path);
+            Files.write(path, lines, StandardOpenOption.APPEND);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return pos;
+
     }
 
 }

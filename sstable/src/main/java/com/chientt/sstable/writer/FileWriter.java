@@ -11,5 +11,5 @@ public interface FileWriter {
     /**
      *
      */
-    void write(Data data);
+    long write(Data data);
 }

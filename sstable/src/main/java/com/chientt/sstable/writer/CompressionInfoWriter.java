@@ -9,7 +9,7 @@ import com.chientt.sstable.Data;
 public class CompressionInfoWriter implements FileWriter{
 
     @Override
-    public void write(Data data) {
+    public long write(Data data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
