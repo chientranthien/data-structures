@@ -23,7 +23,7 @@ public class IndexWriter implements FileWriter {
         long pos = -1;
         try {
             List<String> lines = Arrays.asList(
-                    data.word + SEPARATED_CHAR + data.index);
+                    data.value + SEPARATED_CHAR + data.index);
             Path path = Paths.get(INDEX_PATH);
             pos = Files.size(path);
             Files.write(path, lines, StandardOpenOption.APPEND);

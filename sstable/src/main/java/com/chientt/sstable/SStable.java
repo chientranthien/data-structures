@@ -6,5 +6,7 @@ package com.chientt.sstable;
  */
 public class SStable {
 
-    
+    public Data find(String word) {
+        return null;
+    }
 }

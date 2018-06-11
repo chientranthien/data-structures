@@ -7,11 +7,11 @@ package com.chientt.sstable;
 public class Data {
 
     public String index;
-    public String word;
+    public String value;
 
-    public Data(String index, String word) {
+    public Data(String index, String value) {
         this.index = index;
-        this.word = word;
+        this.value = value;
     }
     
     
