@@ -13,6 +13,9 @@ public class Data {
         this.index = index;
         this.value = value;
     }
+
+    public Data() {
+    }
     
     
 }

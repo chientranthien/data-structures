@@ -10,5 +10,13 @@ public class IndexData {
 
     public String index;
     public Set<Long> offsets;
-    
+
+    public IndexData(String index, Set<Long> offsets) {
+        this.index = index;
+        this.offsets = offsets;
+    }
+
+    public IndexData() {
+    }
+
 }

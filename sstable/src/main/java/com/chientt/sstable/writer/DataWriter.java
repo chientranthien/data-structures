@@ -28,7 +28,7 @@ public class DataWriter implements FileWriter {
         long pos = -1;
         try {
             List<String> lines = Arrays.asList(
-                    data.index + data.value);
+                    data.index + " " + data.value);
             Path path = Paths.get(DATA_PATH);
             pos = Files.size(path);
             Files.write(path, lines, StandardOpenOption.APPEND);

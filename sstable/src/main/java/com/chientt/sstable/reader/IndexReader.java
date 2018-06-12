@@ -11,17 +11,24 @@ import java.util.Set;
 
 public class IndexReader {
 
+    public static final String INDEX_PATH = "index.db";
+    private static final String SEPARATED_CHAR = " ";
+
     public Map<String, IndexData> read() throws FileNotFoundException {
         Map<String, IndexData> result = new HashMap<>();
-        File file = new File("");
-        try (Scanner scanner
-                = new Scanner(file)) {
+
+        File file = new File(INDEX_PATH);
+        if (!file.exists()) {
+            return result;
+        }
+        try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] splited = line.split(" ");
+                String[] splited = line.split(SEPARATED_CHAR);
                 IndexData indexData = new IndexData();
                 indexData.index = splited[0];
                 indexData.offsets = extractOffets(splited);
+                result.put(indexData.index, indexData);
             }
         }
 
