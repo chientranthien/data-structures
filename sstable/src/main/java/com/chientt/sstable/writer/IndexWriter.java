@@ -16,7 +16,7 @@ import java.util.List;
 public class IndexWriter {
 
     public static String INDEX_PATH = "index.db";
-    private static final char SEPARATED_CHAR = ' ';
+    private static final String SEPARATED_CHAR = " ";
 
     public long write(IndexData data) {
         long pos = -1;
@@ -27,8 +27,12 @@ public class IndexWriter {
             }
             List<String> lines = Arrays.asList(line);
             Path path = Paths.get(INDEX_PATH);
-            pos = Files.size(path);
-            Files.write(path, lines, StandardOpenOption.WRITE);
+
+            if (Files.exists(path)) {
+                pos = Files.size(path);
+
+            }
+            Files.write(path, lines);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

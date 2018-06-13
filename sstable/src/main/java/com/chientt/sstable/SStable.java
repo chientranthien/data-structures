@@ -20,16 +20,17 @@ import java.util.Map;
 public class SStable {
 
     public Map<String, IndexData> indexes;
-    private DataReader dataReader = new DataReader();
-    private DataWriter dataWriter = new DataWriter();
-    private IndexWriter indexWriter = new IndexWriter();
+    private final DataReader dataReader = new DataReader();
+    private final DataWriter dataWriter = new DataWriter();
+    private final IndexWriter indexWriter = new IndexWriter();
+    private final IndexReader reader = new IndexReader();
 
     public SStable() throws FileNotFoundException {
-        IndexReader reader = new IndexReader();
         indexes = reader.read();
     }
 
     public List<Data> find(String word) throws IOException {
+
         IndexData index = indexes.get(word);
         if (index == null) {
             return Collections.EMPTY_LIST;
@@ -57,9 +58,7 @@ public class SStable {
         for (IndexData aIndexData : indexData) {
             indexWriter.write(aIndexData);
         }
-        
+
     }
-    
-    
 
 }

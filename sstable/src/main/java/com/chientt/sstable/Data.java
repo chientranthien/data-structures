@@ -15,6 +15,12 @@ public class Data {
     }
 
     public Data() {
+        
+    }
+
+    @Override
+    public String toString() {
+        return "Data{" + "index=" + index + ", value=" + value + '}';
     }
     
     

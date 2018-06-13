@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -27,8 +28,10 @@ public class DataWriter implements FileWriter {
     public long write(Data data) {
         long pos = -1;
         try {
+            byte[] encodeIndex = Base64.getEncoder().encode(data.index.getBytes());
+            byte[] encodeValue = Base64.getEncoder().encode(data.value.getBytes());
             List<String> lines = Arrays.asList(
-                    data.index + " " + data.value);
+                    new String(encodeIndex) + " " + new String(encodeValue));
             Path path = Paths.get(DATA_PATH);
             pos = Files.size(path);
             Files.write(path, lines, StandardOpenOption.APPEND);
