@@ -16,10 +16,9 @@ public class SStableTests {
     @Test
     public void test() throws FileNotFoundException, IOException {
         SStable sstable = new SStable();
-//        sstable.add(new Data("word", "this doc contains a word"));
         sstable.add(new Data("this", "this doc contains a word"));
-        sstable.persistAllIndexs();
-        List<Data> aaa = sstable.find("this");
+//        sstable.add(new Data("this", "a word"));
+        List<Data> aaa = sstable.find("word");
         System.out.println(aaa);
     }
 }

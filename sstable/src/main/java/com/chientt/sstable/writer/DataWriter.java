@@ -33,6 +33,9 @@ public class DataWriter implements FileWriter {
             List<String> lines = Arrays.asList(
                     new String(encodeIndex) + " " + new String(encodeValue));
             Path path = Paths.get(DATA_PATH);
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+            }
             pos = Files.size(path);
             Files.write(path, lines, StandardOpenOption.APPEND);
         } catch (IOException ex) {

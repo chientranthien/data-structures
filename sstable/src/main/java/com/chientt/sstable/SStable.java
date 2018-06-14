@@ -51,14 +51,12 @@ public class SStable {
         }
         indexData.offsets.add(offset);
         indexes.put(data.index, indexData);
+        persistAllIndexs();
     }
 
     public void persistAllIndexs() {
         Collection<IndexData> indexData = indexes.values();
-        for (IndexData aIndexData : indexData) {
-            indexWriter.write(aIndexData);
-        }
-
+        indexWriter.write(indexData);
     }
 
 }
