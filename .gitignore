@@ -1,1 +1,3 @@
 /sstable/target/
+/sstable/index.db
+/sstable/data.db
