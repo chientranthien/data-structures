@@ -1,4 +1,4 @@
-package com.chientt.sstable;
+package com.chientt.sstable.entity;
 
 /**
  *
@@ -22,6 +22,7 @@ public class Data {
     public String toString() {
         return "Data{" + "index=" + index + ", value=" + value + '}';
     }
+
     
     
 }

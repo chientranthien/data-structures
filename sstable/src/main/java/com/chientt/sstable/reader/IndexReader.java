@@ -1,6 +1,8 @@
 package com.chientt.sstable.reader;
 
-import com.chientt.sstable.IndexData;
+import static com.chientt.sstable.constant.GlobalConstant.SEPARATED_CHAR;
+import com.chientt.sstable.entity.IndexData;
+import static com.chientt.sstable.writer.IndexWriter.INDEX_PATH;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -11,8 +13,6 @@ import java.util.Set;
 
 public class IndexReader {
 
-    public static final String INDEX_PATH = "index.db";
-    private static final String SEPARATED_CHAR = " ";
 
     public Map<String, IndexData> read() throws FileNotFoundException {
         Map<String, IndexData> result = new HashMap<>();

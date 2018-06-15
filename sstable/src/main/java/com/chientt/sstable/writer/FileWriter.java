@@ -1,6 +1,6 @@
 package com.chientt.sstable.writer;
 
-import com.chientt.sstable.Data;
+import com.chientt.sstable.entity.Data;
 
 /**
  *

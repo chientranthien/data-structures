@@ -1,4 +1,4 @@
-package com.chientt.sstable;
+package com.chientt.sstable.entity;
 
 import java.util.Set;
 

@@ -1,5 +1,7 @@
 package com.chientt.sstable;
 
+import com.chientt.sstable.entity.IndexData;
+import com.chientt.sstable.entity.Data;
 import com.chientt.sstable.reader.DataReader;
 import com.chientt.sstable.reader.IndexReader;
 import com.chientt.sstable.writer.DataWriter;

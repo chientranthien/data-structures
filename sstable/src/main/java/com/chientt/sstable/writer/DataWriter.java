@@ -1,6 +1,8 @@
 package com.chientt.sstable.writer;
 
-import com.chientt.sstable.Data;
+import static com.chientt.sstable.constant.GlobalConstant.DATA_PATH;
+import com.chientt.sstable.entity.Data;
+import com.chientt.sstable.util.DataUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,8 +18,6 @@ import java.util.List;
  */
 public class DataWriter implements FileWriter {
 
-    public static String DATA_PATH = "data.db";
-
     /**
      * key columnCount
      *
@@ -28,10 +28,8 @@ public class DataWriter implements FileWriter {
     public long write(Data data) {
         long pos = -1;
         try {
-            byte[] encodeIndex = Base64.getEncoder().encode(data.index.getBytes());
-            byte[] encodeValue = Base64.getEncoder().encode(data.value.getBytes());
-            List<String> lines = Arrays.asList(
-                    new String(encodeIndex) + " " + new String(encodeValue));
+            String line = DataUtils.encodeData(data);
+            List<String> lines = Arrays.asList(line);
             Path path = Paths.get(DATA_PATH);
             if (!Files.exists(path)) {
                 Files.createFile(path);
