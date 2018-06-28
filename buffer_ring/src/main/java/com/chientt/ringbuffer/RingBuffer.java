@@ -1,9 +1,9 @@
-package com.chientt.bufferring;
+package com.chientt.ringbuffer;
 
 /**
  * @author chientt
  */
-public class BufferRing<T> {
+public class RingBuffer<T> {
 
     private Object[] data;
     private int writePos;
@@ -11,7 +11,7 @@ public class BufferRing<T> {
     private int capacity;
     private boolean flipped;
 
-    public BufferRing(int capacity) {
+    public RingBuffer(int capacity) {
         this.capacity = capacity;
         data = new Object[capacity];
     }
@@ -29,25 +29,42 @@ public class BufferRing<T> {
         return capacity - readPos + writePos;
     }
 
-
     public int remainingCapacity() {
-        if(!flipped){
+        if (!flipped) {
             return capacity - writePos;
         }
         return readPos - writePos;
     }
-    public void put(T t) {
-        data[writePos] = t;
-        writePos++;
-        if (writePos >= capacity)
-            writePos = 0;
+
+    public boolean put(T t) {
+        if (flipped) {
+            if (writePos < readPos) {
+                data[writePos++] = t;
+            } else {
+                return false;
+            }
+
+        } else {
+            if (writePos > readPos) {
+                data[writePos++] = t;
+                if (writePos >= capacity) {
+                    writePos = 0;
+                    flipped = true;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public T take() {
         T result = (T) data[readPos];
         readPos++;
-        if (readPos >= capacity)
+        if (readPos >= capacity) {
             readPos = 0;
+        }
 
         return result;
     }
