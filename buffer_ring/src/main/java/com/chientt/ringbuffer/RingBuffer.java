@@ -3,9 +3,9 @@ package com.chientt.ringbuffer;
 /**
  * @author chientt
  */
-public class RingBuffer<T> {
+public class RingBuffer<T> implements Queue<T> {
 
-    private Object[] data;
+    public Object[] data;
     private int writePos;
     private int readPos;
     private int capacity;
@@ -22,20 +22,7 @@ public class RingBuffer<T> {
         this.flipped = false;
     }
 
-    public int available() {
-        if (!flipped) {
-            return writePos - readPos;
-        }
-        return capacity - readPos + writePos;
-    }
-
-    public int remainingCapacity() {
-        if (!flipped) {
-            return capacity - writePos;
-        }
-        return readPos - writePos;
-    }
-
+    @Override
     public boolean put(T t) {
         if (flipped) {
             if (writePos < readPos) {
@@ -45,27 +32,38 @@ public class RingBuffer<T> {
             }
 
         } else {
-            if (writePos > readPos) {
-                data[writePos++] = t;
-                if (writePos >= capacity) {
-                    writePos = 0;
-                    flipped = true;
-                }
-            } else {
-                return false;
+            data[writePos++] = t;
+            if (writePos >= capacity) {
+                writePos = 0;
+                flipped = true;
             }
         }
 
         return true;
     }
 
+    @Override
     public T take() {
-        T result = (T) data[readPos];
-        readPos++;
-        if (readPos >= capacity) {
-            readPos = 0;
+        if (flipped) {
+
+            T result = (T) data[readPos++];
+            if (readPos >= capacity) {
+                readPos = 0;
+                flipped = false;
+            }
+            return result;
+        } else {
+            if (readPos < writePos) {
+                T result = (T) data[readPos++];
+                if (readPos >= capacity) {
+                    readPos = 0;
+                }
+                return result;
+            } else {
+                return null;
+            }
         }
 
-        return result;
     }
+
 }
