@@ -1,3 +1,4 @@
 /sstable/target/
 /sstable/index.db
 /sstable/data.db
+/bloom_filter/target/
