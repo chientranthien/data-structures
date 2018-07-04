@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.chientt.bloomfilter.BLoomFilterTest2
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.232 s <<< FAILURE! - in com.chientt.bloomfilter.BLoomFilterTest2
+shouldNotContain(com.chientt.bloomfilter.BLoomFilterTest2)  Time elapsed: 0.13 s  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[fals]e> but was:<[tru]e>
+	at com.chientt.bloomfilter.BLoomFilterTest2.shouldNotContain(BLoomFilterTest2.java:39)
+
