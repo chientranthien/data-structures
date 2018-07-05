@@ -15,8 +15,13 @@ public class Md5BloomFilter implements BloomFilter {
     private BitSet bitSet;
     private int numberElementAdded;
     private int bitSetSize;
-    static final String hashName = "MD5"; // MD5 gives good enough accuracy in most circumstances. Change to SHA1 if it's needed
-    static final MessageDigest digestFunction;
+    private static final String hashName = "MD5";
+    private static final MessageDigest digestFunction;
+
+    public Md5BloomFilter(int bitSetSize) {
+        this.bitSetSize = bitSetSize;
+        bitSet= new BitSet(bitSetSize);
+    }
 
     static { // The digest method is reused between instances
         MessageDigest tmp;
@@ -47,6 +52,7 @@ public class Md5BloomFilter implements BloomFilter {
         for (int hash : hashes) {
             int index = getIndex(hash);
             bitSet.set(index);
+            numberElementAdded++;
         }
     }
 
@@ -56,35 +62,28 @@ public class Md5BloomFilter implements BloomFilter {
 
     private int[] hash(String val, int num_hash) {
         int result[] = new int[num_hash];
-        for (int i = 0; i < num_hash; i++) {
-//digestFunction.de
+        for (byte i = 0; i < num_hash; i++) {
+            digestFunction.update(i);
+            byte[] digest = digestFunction.digest(val.getBytes());
+            int len = digest.length;
+            for (int j = 0; j < len && i < num_hash; j += 4) {
+                int hash = bytesToInt(digest, j, j + 4);
+                result[i] = hash;
+                i++;
+            }
         }
         return result;
     }
-    
-//public static int[] createHashes(byte[] data, int hashes) {
-//        int[] result = new int[hashes];
-//
-//        int k = 0;
-//        byte salt = 0;
-//        while (k < hashes) {
-//            byte[] digest;
-//            synchronized (digestFunction) {
-//                digestFunction.update(salt);
-//                salt++;
-//                digest = digestFunction.digest(data);                
-//            }
-//        
-//            for (int i = 0; i < digest.length/4 && k < hashes; i++) {
-//                int h = 0;
-//                for (int j = (i*4); j < (i*4)+4; j++) {
-//                    h <<= 8;
-//                    h |= ((int) digest[j]) & 0xFF;
-//                }
-//                result[k] = h;
-//                k++;
-//            }
-//        }
-//        return result;
-//    }
+
+    private int bytesToInt(byte[] bytes, int from, int to) {
+        int num = 0;
+        for (int i = from; i < to; i++) {
+            byte aByte = bytes[from];
+            num = num << 8;
+            num |= aByte;
+        }
+        return num;
+    }
+
+  
 }

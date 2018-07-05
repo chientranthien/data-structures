@@ -7,21 +7,21 @@ import org.junit.Test;
  *
  * @author chientt
  */
-public class BLoomFilterTest {
+public class Md5BloomFilterTest {
 
     private String[] inputs
             = new String[]{"this", "is", "a", "very", "simple", "test"};
     private String[] randomInputs
             = new String[]{"go", "to", "a", "place"};
     BloomFilter bloomFilter
-            = new SimpleBloomFilter(inputs.length);
+            = new Md5BloomFilter(inputs.length);
 
-    public BLoomFilterTest() {
+    public Md5BloomFilterTest() {
         for (String input : inputs) {
             bloomFilter.put(input);
         }
     }
-
+    
     @Test
     public void shouldContain() {
 
@@ -30,5 +30,4 @@ public class BLoomFilterTest {
             Assertions.assertThat(mayContain).isTrue();
         }
     }
-
 }
