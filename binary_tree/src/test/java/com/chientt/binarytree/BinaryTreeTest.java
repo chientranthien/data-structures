@@ -1,6 +1,6 @@
 package com.chientt.binarytree;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.powermock.reflect.Whitebox;
 
@@ -21,16 +21,15 @@ public class BinaryTreeTest {
 
         BinaryTree.Node parent = Whitebox.getInternalState(binaryTree, "root");
 
-        Assertions.assertThat(parent.getData()).isEqualTo(inputs[0]);
+        assertThat(parent.getData()).isEqualTo(inputs[0]);
         BinaryTree.Node left = parent.getLeftNode();
-        Assertions.assertThat(left.getData()).isEqualTo(inputs[1]);
+        assertThat(left.getData()).isEqualTo(inputs[1]);
         BinaryTree.Node right = parent.getRightNode();
-        Assertions.assertThat(right.getData()).isEqualTo(inputs[2]);
+        assertThat(right.getData()).isEqualTo(inputs[2]);
         parent = left;
         left = parent.getLeftNode();
-        Assertions.assertThat(left.getData()).isEqualTo(inputs[3]);
+        assertThat(left.getData()).isEqualTo(inputs[3]);
         right = parent.getRightNode();
-        Assertions.assertThat(right.getData()).isEqualTo(inputs[4]);
-
+        assertThat(right.getData()).isEqualTo(inputs[4]);
     }
 }

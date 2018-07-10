@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.chientt.binarytree.BinaryTreeTest
+Test set: com.chientt.binarytree.BinaryTreeIterTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.232 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.252 sec
