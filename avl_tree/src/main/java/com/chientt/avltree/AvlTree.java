@@ -12,6 +12,12 @@ public class AvlTree<T> {
         Node<T> node;
     }
 
+int height(Node N) {
+        if (N == null)
+            return 0;
+ 
+        return N.height;
+    }
 Node rightRotate(Node y) {
         Node x = y.left;
         Node T2 = x.right;
