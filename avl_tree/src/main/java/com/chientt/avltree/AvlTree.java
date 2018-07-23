@@ -18,6 +18,14 @@ int height(Node N) {
  
         return N.height;
     }
+
+int getBalance(Node N) {
+        if (N == null)
+            return 0;
+ 
+        return height(N.left) - height(N.right);
+    }
+ 
 Node rightRotate(Node y) {
         Node x = y.left;
         Node T2 = x.right;
