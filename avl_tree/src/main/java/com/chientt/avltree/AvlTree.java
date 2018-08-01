@@ -49,16 +49,12 @@ public class AvlTree {
         return y;
     }
 
-    public void traverse() {
-
-    }
-
     public static class Node {
 
-        private int data;
-        private int height;
-        private Node leftNode;
-        private Node rightNode;
+        public int data;
+        public int height;
+        public Node leftNode;
+        public Node rightNode;
 
         public Node(int data) {
             this.data = data;
@@ -68,13 +64,14 @@ public class AvlTree {
     }
 
     public void insert(int data) {
-        internalInsert(root, data);
+
+        root = internalInsert(root, data);
     }
 
     private Node internalInsert(Node node, int data) {
 
         if (node == null) {
-            return (new Node(data));
+            node = (new Node(data));
         }
 
         if (data < node.data) {
