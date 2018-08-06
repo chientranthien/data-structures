@@ -1,48 +1,111 @@
 package com.chientt.avltree;
 
 /**
- *
  * @author chientt
  */
-public class AvlTree<T> {
+public class AvlTree {
 
-    private Node<T> root;
+    private Node root;
 
-    public void insert(T data) {
-        Node<T> node;
+    int height(Node N) {
+        if (N == null) {
+            return 0;
+        }
+
+        return N.height;
     }
 
-Node rightRotate(Node y) {
-        Node x = y.left;
-        Node T2 = x.right;
- 
-        // Perform rotation
-        x.right = y;
-        y.left = T2;
- 
-        // Update heights
-        y.height = max(height(y.left), height(y.right)) + 1;
-        x.height = max(height(x.left), height(x.right)) + 1;
- 
-        // Return new root
-        return x;
-    }
-    public void traverse() {
+    int getBalance(Node N) {
+        if (N == null) {
+            return 0;
+        }
 
+        return height(N.leftNode) - height(N.rightNode);
     }
 
-    public static class Node<T> {
+    Node leftRotate(Node z) {
+        Node y = z.rightNode;
+        Node T2 = y.leftNode;
 
-        private int data;
-        private int height;
-        private Node<T> leftNode;
-        private Node<T> rightNode;
+        y.leftNode = z;
+        z.rightNode = T2;
+
+        z.height = Math.max(height(z.leftNode), height(z.rightNode)) + 1;
+        y.height = Math.max(height(y.leftNode), height(y.rightNode)) + 1;
+
+        return y;
+    }
+
+    Node rightRotate(Node z) {
+        Node y = z.leftNode;
+        Node T3 = y.rightNode;
+
+        y.rightNode = z;
+        z.leftNode = T3;
+
+        z.height = Math.max(height(z.leftNode), height(z.rightNode)) + 1;
+        y.height = Math.max(height(y.leftNode), height(y.rightNode)) + 1;
+
+        return y;
+    }
+
+    public static class Node {
+
+        public int data;
+        public int height;
+        public Node leftNode;
+        public Node rightNode;
 
         public Node(int data) {
             this.data = data;
             height = 1;
         }
 
+    }
+
+    public void insert(int data) {
+
+        root = internalInsert(root, data);
+    }
+
+    private Node internalInsert(Node node, int data) {
+
+        if (node == null) {
+            node = (new Node(data));
+        }
+
+        if (data < node.data) {
+            node.leftNode = internalInsert(node.leftNode, data);
+        } else if (data > node.data) {
+            node.rightNode = internalInsert(node.rightNode, data);
+        } else {
+            return node;
+        }
+
+        node.height = 1 + Math.max(height(node.leftNode),
+                height(node.rightNode));
+
+        int balance = getBalance(node);
+
+        if (balance > 1 && data < node.leftNode.data) {
+            return rightRotate(node);
+        }
+
+        if (balance < -1 && data > node.rightNode.data) {
+            return leftRotate(node);
+        }
+
+        if (balance > 1 && data > node.leftNode.data) {
+            node.leftNode = leftRotate(node.leftNode);
+            return rightRotate(node);
+        }
+
+        if (balance < -1 && data < node.rightNode.data) {
+            node.rightNode = rightRotate(node.rightNode);
+            return leftRotate(node);
+        }
+
+        return node;
     }
 
 }
