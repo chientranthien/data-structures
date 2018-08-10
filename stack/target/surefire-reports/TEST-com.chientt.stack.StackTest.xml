@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.chientt.stack.StackTest" time="0.256" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="com.chientt.stack.StackTest" time="0.242" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/chientt/jdk1.8.0_151/jre/lib/amd64"/>
@@ -61,6 +61,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.chientt.stack.StackTest" name="testPop" time="0.17"/>
+  <testcase classname="com.chientt.stack.StackTest" name="testPop" time="0.165"/>
   <testcase classname="com.chientt.stack.StackTest" name="testPush" time="0"/>
+  <testcase classname="com.chientt.stack.StackTest" name="testAutoResize" time="0"/>
 </testsuite>

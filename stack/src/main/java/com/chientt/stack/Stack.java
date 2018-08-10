@@ -1,5 +1,7 @@
 package com.chientt.stack;
 
+import java.util.Arrays;
+
 /**
  *
  * @author chientt
@@ -15,9 +17,19 @@ public class Stack<T> {
         array = new Object[DEFAULT_CAPACITY];
     }
 
+    public Stack(int capacity) {
+        pos = -1;
+        array = new Object[capacity];
+    }
+
     public void push(T value) {
         pos++;
-        array[pos] = value;
+        if (pos < array.length) {
+            array[pos] = value;
+        } else {
+            int newLength = array.length * 2;
+            array = Arrays.copyOf(array, newLength);
+        }
     }
 
     public T pop() {
